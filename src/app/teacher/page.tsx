@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { cookies } from 'next/headers'
 import { createClient } from '@/utils/supabase/server'
 import { getCurrentUserAndProfile } from '@/lib/auth'
-import { StatCard, PageHeader } from '@/components/ui/shared'
+import { StatCard } from '@/components/ui/shared'
 import { Users, ClipboardList, FileText, GraduationCap } from 'lucide-react'
 
 interface TeacherAssignmentItem {
@@ -40,7 +40,20 @@ export default async function TeacherDashboard() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Teacher Dashboard" subtitle="Here's your teaching overview for today." />
+      {/* Emerald Hero Banner */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-900 via-teal-900 to-green-950 p-8 text-white shadow-xl shadow-emerald-900/10 border border-emerald-800">
+        <div className="relative z-10 max-w-2xl space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold border border-emerald-400/30">
+            <GraduationCap className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Teaching Workspace</span>
+          </div>
+          <h1 className="text-3xl font-extrabold tracking-tight">Teacher Dashboard</h1>
+          <p className="text-sm text-emerald-200/80 leading-relaxed">
+            Here&apos;s your teaching overview for today — classes, assignments, and pending reviews.
+          </p>
+        </div>
+        <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-radial from-emerald-500/20 to-transparent pointer-events-none" />
+      </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard label="My Classes" value={classCount ?? 0} icon={<Users className="w-5 h-5 text-white" />} color="bg-emerald-500" />

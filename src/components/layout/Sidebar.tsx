@@ -19,6 +19,17 @@ import {
   Sparkles,
   PanelLeftClose,
   PanelLeftOpen,
+  Award,
+  Layers,
+  Library,
+  CalendarCheck,
+  ClipboardCheck,
+  BookMarked,
+  FolderOpen,
+  MessagesSquare,
+  ScrollText,
+  User,
+  School,
 } from 'lucide-react'
 
 const iconMap = {
@@ -34,6 +45,17 @@ const iconMap = {
   FileText,
   MessageSquare,
   Upload,
+  Award,
+  Layers,
+  Library,
+  CalendarCheck,
+  ClipboardCheck,
+  BookMarked,
+  FolderOpen,
+  MessagesSquare,
+  ScrollText,
+  User,
+  School,
 }
 
 interface NavItem {

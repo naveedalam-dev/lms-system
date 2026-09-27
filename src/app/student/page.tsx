@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import { createClient } from '@/utils/supabase/server'
 import { getCurrentUserAndProfile } from '@/lib/auth'
-import { StatCard, PageHeader } from '@/components/ui/shared'
+import { StatCard } from '@/components/ui/shared'
 import { Upload, ClipboardList, BookOpen, Bell } from 'lucide-react'
 
 interface StudentProfileQuery {
@@ -72,10 +72,20 @@ export default async function StudentDashboard() {
 
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Student Dashboard"
-        subtitle={`${gradeName}${sectionName ? ` — ${sectionName}` : ''} • Welcome back!`}
-      />
+      {/* Violet Hero Banner */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-violet-900 via-purple-900 to-fuchsia-950 p-8 text-white shadow-xl shadow-violet-900/10 border border-violet-800">
+        <div className="relative z-10 max-w-2xl space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/20 text-violet-300 text-[11px] font-bold border border-violet-400/30">
+            <BookOpen className="w-3.5 h-3.5 text-violet-400" />
+            <span>{gradeName}{sectionName ? ` — ${sectionName}` : ''}</span>
+          </div>
+          <h1 className="text-3xl font-extrabold tracking-tight">Student Dashboard</h1>
+          <p className="text-sm text-violet-200/80 leading-relaxed">
+            Welcome back! Track your assignments, attendance, and grades in one place.
+          </p>
+        </div>
+        <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-radial from-violet-500/20 to-transparent pointer-events-none" />
+      </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard label="Pending Assignments" value={assignments.length} icon={<Upload className="w-5 h-5 text-white" />} color="bg-amber-500" />

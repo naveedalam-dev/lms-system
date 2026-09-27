@@ -7,11 +7,20 @@ const navItems = [
   { label: 'Dashboard', href: '/admin', icon: 'LayoutDashboard' },
   { label: 'Students', href: '/admin/students', icon: 'Users' },
   { label: 'Teachers', href: '/admin/teachers', icon: 'GraduationCap' },
-  { label: 'Classes', href: '/admin/classes', icon: 'BookOpen' },
-  { label: 'Subjects', href: '/admin/subjects', icon: 'ClipboardList' },
-  { label: 'Timetable', href: '/admin/timetable', icon: 'Calendar' },
-  { label: 'Announcements', href: '/admin/announcements', icon: 'Bell' },
+  { label: 'Grades', href: '/admin/grades', icon: 'Award' },
+  { label: 'Sections', href: '/admin/sections', icon: 'Layers' },
+  { label: 'Subjects', href: '/admin/subjects', icon: 'BookOpen' },
+  { label: 'Courses', href: '/admin/courses', icon: 'Library' },
+  { label: 'Attendance', href: '/admin/attendance', icon: 'CalendarCheck' },
+  { label: 'Assignments', href: '/admin/assignments', icon: 'FileText' },
+  { label: 'Assessments', href: '/admin/assessments', icon: 'ClipboardCheck' },
+  { label: 'Gradebook', href: '/admin/gradebook', icon: 'BookMarked' },
+  { label: 'Materials', href: '/admin/materials', icon: 'FolderOpen' },
+  { label: 'Discussions', href: '/admin/discussions', icon: 'MessagesSquare' },
+  { label: 'Messages', href: '/admin/messages', icon: 'MessageSquare' },
+  { label: 'Notifications', href: '/admin/notifications', icon: 'Bell' },
   { label: 'Reports', href: '/admin/reports', icon: 'BarChart3' },
+  { label: 'Audit Logs', href: '/admin/audit-logs', icon: 'ScrollText' },
   { label: 'Settings', href: '/admin/settings', icon: 'Settings' },
 ]
 
@@ -31,6 +40,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       role="Admin"
       title="Admin Command Center"
       accentColor="bg-blue-600"
+      theme="admin"
       userName={userName}
       userEmail={profile?.email}
     >

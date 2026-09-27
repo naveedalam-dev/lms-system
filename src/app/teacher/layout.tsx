@@ -6,13 +6,17 @@ import { AppShell } from '@/components/layout/AppShell'
 
 const navItems = [
   { label: 'Dashboard', href: '/teacher', icon: 'LayoutDashboard' },
-  { label: 'My Classes', href: '/teacher/classes', icon: 'Users' },
-  { label: 'Attendance', href: '/teacher/attendance', icon: 'ClipboardList' },
+  { label: 'My Classes', href: '/teacher/classes', icon: 'School' },
+  { label: 'Students', href: '/teacher/students', icon: 'Users' },
+  { label: 'Attendance', href: '/teacher/attendance', icon: 'CalendarCheck' },
   { label: 'Assignments', href: '/teacher/assignments', icon: 'FileText' },
-  { label: 'Gradebook', href: '/teacher/gradebook', icon: 'GraduationCap' },
-  { label: 'Materials', href: '/teacher/materials', icon: 'BookOpen' },
-  { label: 'Announcements', href: '/teacher/announcements', icon: 'Bell' },
+  { label: 'Assessments', href: '/teacher/assessments', icon: 'ClipboardCheck' },
+  { label: 'Gradebook', href: '/teacher/gradebook', icon: 'BookMarked' },
+  { label: 'Materials', href: '/teacher/materials', icon: 'FolderOpen' },
+  { label: 'Discussions', href: '/teacher/discussions', icon: 'MessagesSquare' },
   { label: 'Messages', href: '/teacher/messages', icon: 'MessageSquare' },
+  { label: 'Notifications', href: '/teacher/notifications', icon: 'Bell' },
+  { label: 'Profile', href: '/teacher/profile', icon: 'User' },
 ]
 
 export default async function TeacherLayout({ children }: { children: React.ReactNode }) {
@@ -31,6 +35,7 @@ export default async function TeacherLayout({ children }: { children: React.Reac
       role="Teacher"
       title="Teacher Portal"
       accentColor="bg-emerald-600"
+      theme="teacher"
       userName={userName}
       userEmail={profile?.email}
     >

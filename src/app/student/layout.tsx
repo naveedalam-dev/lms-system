@@ -7,12 +7,15 @@ import { AppShell } from '@/components/layout/AppShell'
 const navItems = [
   { label: 'Dashboard', href: '/student', icon: 'LayoutDashboard' },
   { label: 'My Courses', href: '/student/courses', icon: 'BookOpen' },
-  { label: 'Assignments', href: '/student/assignments', icon: 'Upload' },
-  { label: 'My Grades', href: '/student/grades', icon: 'GraduationCap' },
-  { label: 'Attendance', href: '/student/attendance', icon: 'ClipboardList' },
+  { label: 'Assignments', href: '/student/assignments', icon: 'FileText' },
   { label: 'Calendar', href: '/student/calendar', icon: 'Calendar' },
-  { label: 'Announcements', href: '/student/announcements', icon: 'Bell' },
+  { label: 'Grades', href: '/student/grades', icon: 'Award' },
+  { label: 'Attendance', href: '/student/attendance', icon: 'CalendarCheck' },
+  { label: 'Materials', href: '/student/materials', icon: 'FolderOpen' },
   { label: 'Messages', href: '/student/messages', icon: 'MessageSquare' },
+  { label: 'Discussions', href: '/student/discussions', icon: 'MessagesSquare' },
+  { label: 'Notifications', href: '/student/notifications', icon: 'Bell' },
+  { label: 'Profile', href: '/student/profile', icon: 'User' },
 ]
 
 export default async function StudentLayout({ children }: { children: React.ReactNode }) {
@@ -31,6 +34,7 @@ export default async function StudentLayout({ children }: { children: React.Reac
       role="Student"
       title="Student Portal"
       accentColor="bg-violet-600"
+      theme="student"
       userName={userName}
       userEmail={profile?.email}
     >

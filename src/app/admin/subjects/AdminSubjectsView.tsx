@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/utils/supabase/client'
-import { Plus, Trash2, Search, BookOpen, Palette, Sparkles } from 'lucide-react'
+import { Plus, Trash2, Search, BookOpen } from 'lucide-react'
 import { EmptyState } from '@/components/ui/shared'
+import { createSubject, deleteSubject } from './actions'
 
 export interface SubjectItem {
   id: string
@@ -41,22 +41,17 @@ export function AdminSubjectsView({ initialSubjects }: Props) {
     setError(null)
     setSubmitting(true)
 
-    const supabase = createClient()
-    const { data, error } = await supabase
-      .from('subjects')
-      .insert({ name, code: code.toUpperCase(), description, color })
-      .select()
+    const result = await createSubject({ name, code, description, color })
 
-    if (!error && data) {
-      setSubjects(prev => [...prev, data[0]])
+    if (result.success && result.subject) {
+      setSubjects(prev => [...prev, result.subject as SubjectItem])
       setName('')
       setCode('')
       setDescription('')
       setShowForm(false)
       router.refresh()
     } else {
-      console.error('Failed to add subject:', error)
-      setError(error?.message || 'Failed to add subject.')
+      setError(result.error || 'Failed to add subject.')
     }
     setSubmitting(false)
   }
@@ -65,14 +60,13 @@ export function AdminSubjectsView({ initialSubjects }: Props) {
     if (!confirm(`Are you sure you want to delete subject "${subjectName}"?`)) return
     setDeletingId(id)
 
-    const supabase = createClient()
-    const { error } = await supabase.from('subjects').delete().eq('id', id)
+    const result = await deleteSubject(id)
 
-    if (!error) {
+    if (result.success) {
       setSubjects(prev => prev.filter(s => s.id !== id))
       router.refresh()
     } else {
-      alert(`Could not delete subject: ${error.message}`)
+      alert(`Could not delete subject: ${result.error}`)
     }
     setDeletingId(null)
   }
