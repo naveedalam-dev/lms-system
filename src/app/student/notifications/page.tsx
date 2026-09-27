@@ -1,12 +1,5 @@
-import { Bell } from 'lucide-react'
-import { PlaceholderPage } from '@/components/ui/placeholder'
+import { NotificationsView } from '@/components/lms/NotificationsView'
 
-export default function NotificationsPage() {
-  return (
-    <PlaceholderPage
-      title="Notifications"
-      subtitle="View announcements and notifications."
-      icon={Bell}
-    />
-  )
+export default function StudentNotificationsPage() {
+  return <NotificationsView />
 }
