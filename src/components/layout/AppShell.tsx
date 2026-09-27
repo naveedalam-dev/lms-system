@@ -1,9 +1,33 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useCallback, useSyncExternalStore } from 'react'
 import { Sidebar } from './Sidebar'
 import { Topbar } from './Topbar'
 import { cn } from '@/lib/utils'
+
+const COLLAPSE_STORAGE_KEY = 'lms_sidebar_collapsed'
+const COLLAPSE_CHANGE_EVENT = 'lms-sidebar-collapsed-change'
+
+function subscribeToCollapsed(callback: () => void) {
+  window.addEventListener('storage', callback)
+  window.addEventListener(COLLAPSE_CHANGE_EVENT, callback)
+  return () => {
+    window.removeEventListener('storage', callback)
+    window.removeEventListener(COLLAPSE_CHANGE_EVENT, callback)
+  }
+}
+
+function getCollapsedSnapshot() {
+  try {
+    return localStorage.getItem(COLLAPSE_STORAGE_KEY) === 'true'
+  } catch {
+    return false
+  }
+}
+
+function getCollapsedServerSnapshot() {
+  return false
+}
 
 interface NavItem {
   label: string
@@ -32,32 +56,21 @@ export function AppShell({
   userEmail,
   children,
 }: AppShellProps) {
-  const [collapsed, setCollapsed] = useState(false)
-  const [mounted, setMounted] = useState(false)
+  const collapsed = useSyncExternalStore(
+    subscribeToCollapsed,
+    getCollapsedSnapshot,
+    getCollapsedServerSnapshot
+  )
 
-  useEffect(() => {
-    setMounted(true)
+  const handleToggleCollapse = useCallback(() => {
+    const next = !getCollapsedSnapshot()
     try {
-      const saved = localStorage.getItem('lms_sidebar_collapsed')
-      if (saved !== null) {
-        setCollapsed(saved === 'true')
-      }
+      localStorage.setItem(COLLAPSE_STORAGE_KEY, String(next))
     } catch {
       // Ignore localStorage errors
     }
+    window.dispatchEvent(new Event(COLLAPSE_CHANGE_EVENT))
   }, [])
-
-  const handleToggleCollapse = () => {
-    setCollapsed(prev => {
-      const next = !prev
-      try {
-        localStorage.setItem('lms_sidebar_collapsed', String(next))
-      } catch {
-        // Ignore
-      }
-      return next
-    })
-  }
 
   return (
     <div className="min-h-screen bg-slate-900/[0.02] text-slate-800 relative selection:bg-blue-500/20 selection:text-blue-900 overflow-x-hidden">

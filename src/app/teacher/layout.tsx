@@ -1,8 +1,7 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { getCurrentUserAndProfile } from '@/lib/auth'
-import { Sidebar } from '@/components/layout/Sidebar'
-import { Topbar } from '@/components/layout/Topbar'
+import { AppShell } from '@/components/layout/AppShell'
 
 
 const navItems = [
@@ -27,18 +26,15 @@ export default async function TeacherLayout({ children }: { children: React.Reac
   const userName = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ') || 'Teacher'
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
-      <Sidebar
-        navItems={navItems}
-        role="Teacher"
-        accentColor="bg-emerald-600"
-        userName={userName}
-        userEmail={profile?.email}
-      />
-      <div className="flex-1 ml-64 flex flex-col min-h-screen">
-        <Topbar title="Teacher Portal" />
-        <main className="flex-1 p-6 overflow-y-auto">{children}</main>
-      </div>
-    </div>
+    <AppShell
+      navItems={navItems}
+      role="Teacher"
+      title="Teacher Portal"
+      accentColor="bg-emerald-600"
+      userName={userName}
+      userEmail={profile?.email}
+    >
+      {children}
+    </AppShell>
   )
 }
